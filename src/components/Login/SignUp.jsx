@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-const SignUp = () => {
+const SignUp = ( {setIsLoggedIn}) => {
+  
 
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -13,6 +14,7 @@ const SignUp = () => {
   const [birthday, setBirthday] = useState('');
 
   function signUp(username, password, firstname, lastname, email, birthday) {
+    setIsLoggedIn(true)
     if(username === '' || password === '' || firstname === '' || lastname === '' || email === '' || birthday === ''){
       alert('Please fill in all the fields')
       return

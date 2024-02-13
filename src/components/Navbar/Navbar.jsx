@@ -8,6 +8,12 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import Img1 from "../../assets/Hero/1.jpg";
+import Img2 from "../../assets/Hero/2.jpg";
+import Img3 from "../../assets/Hero/3.jpg";
+import Img4 from "../../assets/Hero/1.jpg";
+import { FaStar } from "react-icons/fa6";
+import Popup from '../Popup/Popup';
 
 
 
@@ -22,7 +28,7 @@ const Menu = [
   {
     id: 2,
     name: "ABOUT US",
-    link: "#",
+    link: "/about-us",
   },
   {
     id: 3,
@@ -60,13 +66,70 @@ const DropdownLinks = [
 ];
 
 
+const ProductsData = [
+  {
+    id: 1,
+    img: Img1,
+    title: "A",
+    rating: 5.0,
+    color: "White",
+    aosDelay: "0",
+  },
+  {
+    id: 2,
+    img: Img2,
+    title: "A",
+    rating: 4.5,
+    color: "Red",
+    aosDelay: "200",
+  },
+  {
+    id: 3,
+    img: Img3,
+    title: "A",
+    rating: 4.7,
+    color: "Brown",
+    aosDelay: "400",
+  },
+  {
+    id: 4,
+    img: Img4,
+    title: "V",
+    rating: 4.4,
+    color: "Yellow",
+    aosDelay: "600",
+  },
+  {
+    id: 5,
+    img: Img2,
+    title: "V",
+    rating: 4.5,
+    color: "Pink",
+    aosDelay: "800",
+  },
+];
 
-const Navbar = (props) => {
+
+
+const Navbar = () => {
+
+ 
   const [showLogout, setShowLogout] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [showItem, setShowItem] = useState(false);
 
   const navigate = useNavigate();
+
+
+  const [orderPopup, setOrderPopup] = React.useState(false);
+  const handleOrderPopup = () => {
+      
+    setOrderPopup(!orderPopup);
+  };
+
+
+ 
+  
 
 
 
@@ -85,8 +148,12 @@ const Navbar = (props) => {
 
   function logout() {
     console.log('logout')
-    // localStorage.clear();
-    // window.location.reload();
+
+
+    
+    // setIsLoggedIn(false)
+  
+
     navigate('/login')
 
   }
@@ -102,8 +169,16 @@ const Navbar = (props) => {
 
 
   function search(value) {
-    console.log(value);
-  }
+    let count = 0;
+
+    ProductsData.forEach((item) => {
+      if(item.title.toUpperCase().includes(value.toUpperCase())){
+       count++;
+      }
+    })
+
+    console.log(count)
+}
 
 
 
@@ -149,7 +224,7 @@ const Navbar = (props) => {
                       <ul>
                         <li>
                           <a
-                            href="#"
+                            href="/profile"
                             className="inline-block w-full rounded-md p-2 hover:bg-primary/20 "
                           >
                             Profile
@@ -172,7 +247,7 @@ const Navbar = (props) => {
               </div>
 
               <div>
-                <IoCartOutline onClick={() => toggleItem()} className="sm:items-center h-9 w-9" />
+                <IoCartOutline  onClick={() => handleOrderPopup()}  className="sm:items-center h-9 w-9" />
 
 
                 {/* <div  className="">
@@ -257,7 +332,7 @@ const Navbar = (props) => {
 
       </div>
 
-
+      <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />
     </div>
   )
 }

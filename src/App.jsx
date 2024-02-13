@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import Navbar from "./components/Navbar/Navbar"
+import React, { useEffect, useState } from 'react'
 import Hero from "./components/Hero/Hero"
 import Products from "./components/Products/Products"
 import Admin from './components/Admin/Admin'
@@ -7,11 +6,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import SignUp from './components/Login/SignUp'
-
+import AboutUS from './components/About-US/AboutUS'
 import Login from './components/Login/Login'
-
-
 import { createGlobalStyle } from 'styled-components';
+import LayOut from './components/LayOut/LayOut'
+import Profile from './components/Profile/Profile'
+
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -25,19 +25,23 @@ const GlobalStyle = createGlobalStyle`
 
 
 
-
-
-
-
-
-const App = () => {
+function App() {
   const [productData, setProductData] = useState(null);
 
   const handleProductData = (data) => {
     setProductData(data);
   };
 
+  function HomePage() {
 
+    return (
+      <>
+
+        <Hero />
+        <Products handleProductData={handleProductData} />
+      </>
+    );
+  }
 
   React.useEffect(() => {
     AOS.init({
@@ -49,37 +53,28 @@ const App = () => {
     AOS.refresh();
   }, []);
 
-  function HomePage(){
-    return(
-      <>
-      <Navbar data={productData}  />
-      <Hero />
-      <Products onAddProductToCart={handleProductData} />
-      </>
-    )
-  }
 
-  
 
   return (
     <>
-    
-    <GlobalStyle />
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/homepage" element={<HomePage />} />
-        <Route path="/signup" element={<SignUp />} />
+      <GlobalStyle />
+      <Router>
 
-      </Routes>
-    </Router>
- 
-    {/* <Admin /> */}
-   {/* <SignUp/> */}
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/homepage" element={<LayOut><HomePage /></LayOut>} />
+          <Route path="/about-us" element={<LayOut><AboutUS /></LayOut>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path='/products' element={<LayOut><Products /></LayOut>} />
+          <Route path='/profile' element={<Profile />} /> 
 
+        </Routes>
 
+      </Router>
+
+      
     </>
   )
 }
-
 export default App

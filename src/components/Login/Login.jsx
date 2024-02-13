@@ -12,58 +12,61 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  
-  
+
+
   function logIn(username, password) {
 
-    if(username === '' || password === ''){
-      alert('Please fill in all the fields')
-      return
-    }
-    
-    fetch('https://b1dm1kn2-3333.asse.devtunnels.ms/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        'username': username, 
-        'password': password
-      })
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      if(data.message === 'Login successfully'){
-        console.log('login success')
-        //how to navigate to another page
-        navigate('/homepage')
-        
-      }
+    // if (username === '' || password === '') {
+    //   alert('Please fill in all the fields')
+    //   return
+    // }
 
-      else {
-        alert('Wrong username or password')
-      }
- 
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-     // navigate('/homepage')
-  
+    // fetch('https://b1dm1kn2-3333.asse.devtunnels.ms/api/login', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     'username': username,
+    //     'password': password
+    //   })
+    // })
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     return response.json();
+    //   })
+    //   .then(data => {
+    //     if (data.message === 'Login successfully') {
+    //       console.log('login success')
+    //       //how to navigate to another page
+    //       navigate('/homepage')
+
+    //     }
+
+    //     else {
+    //       alert('Wrong username or password')
+    //     }
+
+    //   })
+    //   .catch(error => {
+    //     console.error('Error:', error);
+    //   });
+    // setIsLoggedIn(true)
+    
+    navigate('/homepage')
+
   }
 
   function signUp() {
+   
     navigate('/signup')
 
   }
 
-   
-  
+
+
   return (
     <div className='container flex items-center justify-center min-h-screen w-full'>
       <div className='p-6 border bg-white rounded-lg w-full max-w-md text-center shadow-lg '>
@@ -86,6 +89,11 @@ const Login = () => {
               className='border-b-2 border-gray-300 outline-none focus:border-blue-500 w-full text-lg py-2 placeholder-gray-200'
               type='password' value={password} onChange={e => setPassword(e.target.value)}
               placeholder='Password'
+              onKeyPress={e => {
+                if (e.key === 'Enter') {
+                  logIn(username, password);
+                }
+              }}
             />
           </div>
         </div>
@@ -96,15 +104,17 @@ const Login = () => {
 
         <div className='flex mt-8 space-x-4 justify-center  '>
           <div className='rounded-md px-6 py-3 bg-blue-400 text-white cursor-pointer '
-           onClick={() => signUp()}
+            onClick={() => signUp()}
           >
             Sign Up
           </div>
-       
+
           <button className='rounded-md	px-6 py-3 bg-gray-300 text-gray-700 cursor-pointer'
-          onClick={() => logIn(username, password)}
+            onClick={() => logIn(username, password)}
+
+
           >Login</button>
-  
+
         </div>
       </div>
     </div>

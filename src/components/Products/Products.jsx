@@ -5,6 +5,7 @@ import Img3 from "../../assets/Hero/3.jpg";
 import Img4 from "../../assets/Hero/1.jpg";
 import { FaStar } from "react-icons/fa6";
 import Navbar from '../Navbar/Navbar';
+import Popup from '../Popup/Popup';
 
 
 
@@ -58,6 +59,8 @@ const ProductsData = [
 const data = [];
 
 const Products = (props) => { 
+
+
   
   function addProductToCart(id, title, img, rating, color) {
     data.push({id, title, img, rating, color});
@@ -122,7 +125,10 @@ const Products = (props) => {
           </div>
         </div>
       </div>
+     
     </div>
+
+
   )
 }
 
