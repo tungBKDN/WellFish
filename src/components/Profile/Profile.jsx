@@ -1,21 +1,37 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 const Profile = () => {
-  const state = useNavigate()
 
-  function handleBackToHome() {
-    state('/homepage')
+  const infor = {
+    username: 'Vietpro230',
+    email: '123@gmail.com',
+    firstName: 'Viet',
+    lastName: 'Pro',
+    birthday: '01/01/2000',
+    address: 'Ha Noi',
+
+
   }
+
+  
+  const [edit, setEdit] = useState(false);
+  const [username, setUsername] = useState(infor.username);
+
+
+  
+
+  function handleEdit(event) {
+    setUsername(event.target.value)
+  }
+
+
   return (
     <div className=' h-screen text-center flex flex-col justify-center items-center '>
 
-      <div className=' bg-red-100 p-16 '>
-        <div className='mr-96 pb-8'>
-          <button className='bg-blue-500 text-white p-2 rounded-md'
-            onClick={() => handleBackToHome()}
-          >Back to Home</button>
-        </div>
+      <div className=' bg-gray-100 p-16 '>
+
         <div className='flex rounded-lg'>
           <div className='w-1/3 p-6'>
             <div className='flex justify-center items-center'>
@@ -25,7 +41,7 @@ const Profile = () => {
               <button className='bg-blue-500 text-white p-2 rounded-md'>Change</button>
             </div>
 
-            <h1 className='text-2xl font'>Vietpro</h1>
+           <input type='text' value={username} onChange={handleEdit} className='w-full p-2 mb-4' disabled={!edit} />
 
           </div>
 
@@ -33,51 +49,55 @@ const Profile = () => {
 
             <h1 className='text-2xl text-left mt-4 mb-2 '>Information</h1>
             <div className='border-b-2 border-gray-300 mb-8'></div>
-            <div className='block'>
-              <div className='flex'>
+            <div className='block '>
+              <div className='flex mb-2'>
+                <h1 className='text-xl '>Username:</h1>
+                <h1 className='text-xl'>{infor.username}</h1>
+              </div>
+
+              <div className='flex mb-2'>
                 <h1 className='text-xl '>Email:</h1>
-                <h1 className='text-xl'>Hoangcongviet@gmail.com</h1>
+                <h1 className='text-xl'>{infor.email}</h1>
+              </div>
+
+              <div className='flex mb-2'>
+                <h1 className='text-xl '>First Name:</h1>
+                <h1 className='text-xl'>{infor.firstName}</h1>
+              </div>
+
+              <div className='flex mb-2'>
+                <h1 className='text-xl '>Last Name:</h1>
+                <h1 className='text-xl'>{infor.lastName}</h1>
+              </div>
+
+              <div className='flex mb-2'>
+                <h1 className='text-xl '>Birthday:</h1>
+                <h1 className='text-xl'>{infor.birthday}</h1>
+              </div>
+
+              <div className='flex mb-2'>
+                <h1 className='text-xl '>Address:</h1>
+                <h1 className='text-xl'>{infor.address}</h1>
               </div>
 
               <div className='border-b-2 border-gray-300 mb-4 mt-4'></div>
-              <div className='flex'>
-                <h1 className='text-xl'>Phone :</h1>
-                <h1 className='text-xl'>0987654321</h1>
-              </div>
 
-
-
-
-              <div className='flex justify-center items-center pt-8 '>
+              <div className='flex justify-end items-center  '>
 
                 <div className='p-4'>
-                  <button className='bg-blue-500 text-white p-2 rounded-md'>Edit</button>
+                  <button className='bg-blue-500 text-white p-2 rounded-md'
+                    onClick={() => setEdit(!edit)}>{edit ? 'Save' : 'Edit'}</button>
                 </div>
 
-                <div className=''>
-                  <button className='bg-blue-500 text-white p-2 rounded-md'>Save</button>
-                </div>
-
+             
 
               </div>
-
-
-
-
-
-
-
             </div>
-
-
           </div>
-
-
         </div>
-
       </div>
     </div>
   )
 }
 
-export default Profile
+export default Profile;
