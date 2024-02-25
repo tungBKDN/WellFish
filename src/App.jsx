@@ -11,6 +11,8 @@ import Login from './components/Login/Login'
 import { createGlobalStyle } from 'styled-components';
 import LayOut from './components/LayOut/LayOut'
 import Profile from './components/Profile/Profile'
+import Cart from './components/Cart/Cart';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -26,22 +28,20 @@ const GlobalStyle = createGlobalStyle`
 
 
 function App() {
-  const [productData, setProductData] = useState(null);
-
-  const handleProductData = (data) => {
-    setProductData(data);
-  };
-
+  
+  const [data, setData] = useState(null);
   function HomePage() {
 
     return (
       <>
 
         <Hero />
-        <Products handleProductData={handleProductData} />
+        <Products setData={setData}/>
       </>
     );
   }
+
+
 
   React.useEffect(() => {
     AOS.init({
@@ -66,14 +66,16 @@ function App() {
           <Route path="/about-us" element={<LayOut><AboutUS /></LayOut>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path='/products' element={<LayOut><Products /></LayOut>} />
-          <Route path='/profile' element={<Profile />} /> 
-
+          <Route path='/products' element={<LayOut><Products setData={setData} /></LayOut>} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/cart'  element={<LayOut><Cart Data={data} /></LayOut>} />
+          <Route path='/product-details' element={<LayOut><ProductDetails /></LayOut>} />
+     
         </Routes>
 
       </Router>
 
-      
+    
     </>
   )
 }

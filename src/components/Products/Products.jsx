@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Img1 from "../../assets/Hero/1.jpg";
 import Img2 from "../../assets/Hero/2.jpg";
 import Img3 from "../../assets/Hero/3.jpg";
@@ -6,7 +6,9 @@ import Img4 from "../../assets/Hero/1.jpg";
 import { FaStar } from "react-icons/fa6";
 import Navbar from '../Navbar/Navbar';
 import Popup from '../Popup/Popup';
-
+import Cart from '../Cart/Cart';
+import { useNavigate } from 'react-router-dom';
+import ProductDetails from '../ProductDetails/ProductDetails';
 
 
 
@@ -57,22 +59,37 @@ const ProductsData = [
 
 
 const data = [];
-
 const Products = (props) => { 
+  const navigate = useNavigate();
+  const [item , setItem] = useState(null);
 
-
-  
   function addProductToCart(id, title, img, rating, color) {
     data.push({id, title, img, rating, color});
-    props.onAddProductToCart(data);
-    console.log(data);
+   
+    props.setData(data);
     alert('Add to cart successfully');
-  
   }
+
+  function productDetails(items) {
+    navigate('/product-details');
+    setItem(items);
+
+  }
+
+
+  function getItem(){
+    return item;
+  }
+
+
+
   return (
-    <div className='mt-14 mb-12'>
+
+
+ 
+    <div className='mt-14 mb-12 '>
       <div className='container' >
-        {/* header section */}
+       
         <div className='text-center mb-10 max-w-[600px] mx-auto'>
           <p  data-aos="fade-up" className='text-sm text-primary'>Top Selling Products for you</p>
           <h1 data-aos="fade-up"  className='text-3xl font-bold'>Products</h1>
@@ -81,11 +98,11 @@ const Products = (props) => {
             Quisquam, laborum.
           </p>
         </div>
-        {/* body section */}
+ 
         <div>
           <div className='grid grid-cols-1 sm:grid-cols-3
               md:grid-cols-4 lg:grid-cols-5 place-items-center'>
-            {/*card section*/}
+            
             {
               ProductsData.map((item) => (
                 <div
@@ -94,7 +111,9 @@ const Products = (props) => {
                   key={item.id}
                   className='space-y-3'
                 >
-                  <img src={item.img} alt="" className='w-[150px] h-[200px]  object-cover rounded-md' />
+                  <img src={item.img} alt="" className='w-[150px] h-[200px]  object-cover rounded-md cursor-pointer'
+                  onClick={() => productDetails(item)}
+                   />
                   <div>
                     <h3 className='font-semibold'>{item.title}</h3>
                     <p className='text-sm text-gray-600'>{item.color}</p>
@@ -105,7 +124,7 @@ const Products = (props) => {
 
                     <div>
                       <button 
-                      onClick={() => addProductToCart(item.id, item.title, item.img, item.rating, item.color)}
+                      onClick={() => addProductToCart(item.id, item.title, item.img, item.rating, item.color) }
                       className='bg-primary text-xs px-5 py-2 rounded-md text-white cursor-pointer'>
                         Add to Cart
                       </button>
@@ -117,7 +136,7 @@ const Products = (props) => {
               ))}
           </div>
 
-          {/* view all button */}
+         
           <div className='text-center mt-10'>
             <button className='bg-primary px-5 py-2 rounded-md text-white cursor-pointer'>
               View All
@@ -125,7 +144,6 @@ const Products = (props) => {
           </div>
         </div>
       </div>
-     
     </div>
 
 

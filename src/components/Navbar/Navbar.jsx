@@ -13,11 +13,7 @@ import Img2 from "../../assets/Hero/2.jpg";
 import Img3 from "../../assets/Hero/3.jpg";
 import Img4 from "../../assets/Hero/1.jpg";
 import { FaStar } from "react-icons/fa6";
-import Popup from '../Popup/Popup';
-
-
-
-
+import Cart from '../Cart/Cart'
 
 const Menu = [
   {
@@ -113,27 +109,17 @@ const ProductsData = [
 
 const Navbar = () => {
 
- 
+
   const [showLogout, setShowLogout] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [showItem, setShowItem] = useState(false);
+  const fishList = ['Home'];
 
   const navigate = useNavigate();
 
-
-  const [orderPopup, setOrderPopup] = React.useState(false);
-  const handleOrderPopup = () => {
-      
-    setOrderPopup(!orderPopup);
-  };
-
-
- 
-  
-
-
-
-
+  function cart() {
+    navigate('/cart')
+  }
 
   function toggleLogout() {
     setShowLogout(!showLogout);
@@ -150,9 +136,9 @@ const Navbar = () => {
     console.log('logout')
 
 
-    
+
     // setIsLoggedIn(false)
-  
+
 
     navigate('/login')
 
@@ -172,13 +158,13 @@ const Navbar = () => {
     let count = 0;
 
     ProductsData.forEach((item) => {
-      if(item.title.toUpperCase().includes(value.toUpperCase())){
-       count++;
+      if (item.title.toUpperCase().includes(value.toUpperCase())) {
+        count++;
       }
     })
 
-    console.log(count)
-}
+    console.log(value)
+  }
 
 
 
@@ -187,25 +173,36 @@ const Navbar = () => {
       <div className="bg-primary/40 py-2 flex ">
         {/* img */}
         <div className='container flex justify-between items-center'>
-          <a href='#' className='font-bold text-2xl sm:text-3xl flex gap-2'>
-            <img src={img} alt=""
-              className='w-10' ></img>
-            WellFish
-          </a>
+
+          <div>
+            <a href='#' className='font-bold text-2xl sm:text-3xl flex gap-2'>
+              <img src={img} alt=""
+                className='w-10' ></img>
+              WellFish
+            </a>
+          </div>
           <div className="flex ">
             {/* button search and login*/}
             <div className='flex gap-2 '>
               {/* button search */}
+
               <div className="relative group hidden sm:block">
                 <input
                   type="text"
 
                   onChange={(e) => setSearchValue(e.target.value)}
                   placeholder="search"
-                  className="w-[200px] sm:w-[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-primary dark:border-gray-500 dark:bg-gray-800  "
+                  className="w-[200px] sm:w-[200px] group-hover:w-[300px] transition-all duration-300  border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-primary dark:border-gray-500 dark:bg-gray-800  "
                 />
-                <IoMdSearch onClick={() => search(searchValue)} className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-3 right-2 " />
+
+                  {/* <IoMdSearch onClick={() => search(searchValue)} className="absolute left-56 top-1/2 transform -translate-y-3 text-gray-500 group-hover:text-primary transition-all duration-300" /> */}
+                  <button className="mr-4 bg-blue-500 transition-all duration-300 border border-gray-300 px-2 py-1"
+                    onClick={() => search(searchValue)}
+                  >
+                    Search
+                    </button>
               </div>
+
             </div>
 
             <div className="flex">
@@ -247,7 +244,7 @@ const Navbar = () => {
               </div>
 
               <div>
-                <IoCartOutline  onClick={() => handleOrderPopup()}  className="sm:items-center h-9 w-9" />
+                <IoCartOutline onClick={cart} className="sm:items-center h-9 w-9" />
 
 
                 {/* <div  className="">
@@ -293,6 +290,25 @@ const Navbar = () => {
         </div>
       </div>
 
+     <div className="flex items-center h-8">
+     
+        <ul className="sm:flex hidden items-center gap-4">
+        {fishList.map((item) => (
+          <li key={item} className="sm:block hidden">
+           <a
+            href="/homepage"
+            className="inline-block px-4 hover:text-primary duration-200 text-lg "
+            >{item}</a>
+          </li> 
+          
+          ))}
+        </ul>
+
+      
+     </div>
+
+      
+{/* 
       <div data-aos="zoom-in" className="flex justify-center">
         <ul className="sm:flex hidden items-center gap-4">
           {Menu.map((data) => (
@@ -304,9 +320,9 @@ const Navbar = () => {
                 {data.name}
               </a>
             </li>
-          ))}
-          {/* Simple Dropdown and Links */}
-          <li className="group relative cursor-pointer">
+          ))} */}
+      {/* Simple Dropdown and Links */}
+       {/* <li className="group relative cursor-pointer">
             <a href="#" className="flex items-center gap-[2px] py-2">
               LANGUAGE
               <span>
@@ -327,12 +343,14 @@ const Navbar = () => {
                 ))}
               </ul>
             </div>
-          </li>
-        </ul>
+          </li> 
+       </ul>
 
-      </div>
+      </div>  */}
+      
 
-      <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />
+      {/* <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} /> */}
+
     </div>
   )
 }
