@@ -64,15 +64,8 @@ const App = () => {
   return (
     <>
     
-    <GlobalStyle />
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/homepage" element={<HomePage />} />
-        <Route path="/signup" element={<SignUp />} />
-
-      </Routes>
-    </Router>
+  
+    <Admin />
  
     {/* <Admin /> */}
    {/* <SignUp/> */}

@@ -7,6 +7,7 @@ import Slider from "react-slick";
 
 
 
+
 const ImageList = [
     {
         id: 1,
