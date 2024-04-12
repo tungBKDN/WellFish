@@ -7,11 +7,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import SignUp from './components/Login/SignUp'
-
 import Login from './components/Login/Login'
-
-
+import Revenue from './components/Revenue/Revenue'
 import { createGlobalStyle } from 'styled-components';
+import AddProduct from './components/AddProduct/AddProduct';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -39,6 +38,8 @@ const App = () => {
 
 
 
+
+
   React.useEffect(() => {
     AOS.init({
       offset: 100,
@@ -63,13 +64,19 @@ const App = () => {
 
   return (
     <>
-    
-  
-    <Admin />
- 
-    {/* <Admin /> */}
-   {/* <SignUp/> */}
-
+      <Router>
+        <Routes>
+          <Route path="/" element={<Admin/>} />
+          <Route path="/dashboard" element={<Admin/>} />
+          <Route path="/revenue" element={< Revenue/>} />
+          <Route path="/products" element={<Products/>} />
+          <Route path="/orders" element={<Admin/>} />
+          <Route path="/event" element={<Admin/>} />
+          <Route path="/sales" element={<Admin/>} />
+          <Route path="/accounts" element={<Admin/>} />
+          <Route path='/addproduct' element={<AddProduct/>} />
+        </Routes>
+      </Router>
 
     </>
   )
