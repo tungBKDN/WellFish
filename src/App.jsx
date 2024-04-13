@@ -15,6 +15,7 @@ import Cart from './components/Cart/Cart';
 import ProductDetails from './components/ProductDetails/ProductDetails';
 
 
+
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -70,6 +71,7 @@ function App() {
           <Route path='/profile' element={<LayOut><Profile/></LayOut>} />
           <Route path='/cart'  element={<LayOut><Cart Data={data} /></LayOut>} />
           <Route path='/product-details' element={<LayOut><ProductDetails /></LayOut>} />
+          <Route path='/admin' element = {<Admin/>}/>
      
         </Routes>
 
