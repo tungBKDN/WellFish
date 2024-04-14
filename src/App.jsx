@@ -11,6 +11,7 @@ import Login from './components/Login/Login'
 import Revenue from './components/Revenue/Revenue'
 import { createGlobalStyle } from 'styled-components';
 import AddProduct from './components/AddProduct/AddProduct';
+import Product from './components/Product/Product';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -75,6 +76,7 @@ const App = () => {
           <Route path="/sales" element={<Admin/>} />
           <Route path="/accounts" element={<Admin/>} />
           <Route path='/addproduct' element={<AddProduct/>} />
+          <Route path="/product/:id" element={<Product/>} />
         </Routes>
       </Router>
 

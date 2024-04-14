@@ -61,7 +61,6 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                             </div>
                         </div>
                     </div>
-
                 </div>
 
             </div>}</>

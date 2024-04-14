@@ -23,6 +23,8 @@ const Admin = () => {
 
     const [active, setActive] = useState(false);
     const navigate = useNavigate();
+    const [username, setusername] = useState('Nguyen Van A')
+    const [email, setemail] = useState('Viet@gmail.com')
 
     function outlineClick() {
         setActive(!active);
@@ -99,13 +101,14 @@ const Admin = () => {
 
                     <div className=' flex justify-end pb-1 mr-8 w-full'>
 
+                        
                         <img
-                            className='rounded-full w-16 h-16 '
+                            className='rounded-full w-16 h-16'
                             src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' />
 
                         <div>
-                            <h1 className='text-2xl font-bold text-blue-500'>Nguyen Van A</h1>
-                            <p className='text-sm text-blue-500'>Viet@gmail.com</p>
+                            <h1 className='text-2xl font-bold text-blue-500'>{username}</h1>
+                            <p className='text-sm text-blue-500'>{email}</p>
                         </div>
                     </div>
                 </div>

@@ -146,6 +146,7 @@ import { FaSortAlphaDown } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import { useEffect } from 'react';
 
 
 let listProduct = []
@@ -182,6 +183,14 @@ await fetch('http://13.229.127.197:3333/api/items/getAllItems', {
 const Products = () => {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
+  const [txtSearch, setTxtSearch] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    setFilteredProducts(listProduct[0]?.data);
+  }, [listProduct]);
+
+
 
   function outlineClick() {
     setActive(!active);
@@ -195,6 +204,17 @@ const Products = () => {
 
   function addProductButton() {
     navigate('/addproduct');
+  }
+
+
+  function editProfile() {
+    console.log("edit");
+  }
+
+
+  function search(txtSearch) {
+    const results = listProduct[0]?.data.filter((item) => item.name.toLowerCase().includes(txtSearch.toLowerCase()));
+    setFilteredProducts(results);
   }
 
 
@@ -259,7 +279,8 @@ const Products = () => {
           <div className=' flex justify-end pb-1 mr-8 w-full'>
 
             <img
-              className='rounded-full w-16 h-16 '
+              className='rounded-full w-16 h-16 mr-2 '
+              onClick={() => editProfile()}
               src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' />
 
             <div>
@@ -287,27 +308,23 @@ const Products = () => {
 
 
             <div className='flex justify-end'>
-              <input type="text" placeholder="Search" className='border-2 border-gray-300 rounded-full p-2 ml-8 ' />
-              <button className='bg-[#364A72] text-white px-4 py-2 rounded-md ml-2'>Search</button>
+              <input type="text" placeholder="Search" className='border-2 border-gray-300 rounded-full p-2 ml-8'
+                value={txtSearch}
+                onChange={(e) => setTxtSearch(e.target.value)} />
+              <button className='bg-[#364A72] text-white px-4 py-2 rounded-md ml-2'
+                onClick={() => search(txtSearch)}
+              >Search</button>
             </div>
           </div>
 
 
           <div className='grid grid-cols-5 pt-8 gap-4'>
             {
-              listProduct[0]?.data.map((item) => (
+        
+              filteredProducts.map((item) => (
                 <Product item={item} />
               ))
             }
-            {/* <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product /> */}
-
           </div>
 
 

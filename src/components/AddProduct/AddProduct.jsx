@@ -169,7 +169,7 @@ const AddProduct = () => {
                                 <div className='flex mt-8'>
                                     <div className='flex flex-col'>
                                         <label htmlFor='productdescription' className='text-xl'>Product Description</label>
-                                        <input type='text' id='productdescription' className='border-2 border-black rounded-md px-4 py-2 mt-2 w-[500px] h-[260px]'
+                                        <textarea id='productdescription' className='border-2 border-black rounded-md px-4 py-2 mt-2 w-[500px] h-[260px]'
                                             value={product_description} onChange={(e) => setProductDescription(e.target.value)}
                                         />
                                     </div>
@@ -222,9 +222,6 @@ const AddProduct = () => {
                                                                 
                                                                     <input type='file' id='fileInput' className='hidden' onChange={checkFile} />
                                                                     {product_image && <img src={product_image} alt='Product'/>}
-                                                                
-
-
                                                             </div>
 
                                                         </div>
