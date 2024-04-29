@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Hero from "./components/Hero/Hero"
 import Products from "./components/Products/Products"
-import Admin from './components/Admin/Admin'
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -32,11 +32,13 @@ function App() {
   
   const [data, setData] = useState(null);
   function HomePage() {
+    console.log("hahah")
 
     return (
       <>
 
         <Hero />
+
         <Products setData={setData}/>
       </>
     );
@@ -71,7 +73,7 @@ function App() {
           <Route path='/profile' element={<LayOut><Profile/></LayOut>} />
           <Route path='/cart'  element={<LayOut><Cart Data={data} /></LayOut>} />
           <Route path='/product-details' element={<LayOut><ProductDetails /></LayOut>} />
-          <Route path='/admin' element = {<Admin/>}/>
+
      
         </Routes>
 
